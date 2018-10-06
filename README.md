@@ -6,7 +6,7 @@ Name: Zuojun Zheng
 Note: Hi, this is Zuojun, My apk file is under this path "NewRepresnet/app/build/outputs/apk/debug/"
 Thank you very much!!!
 
-Here is the link to my youtube vedio:https://youtu.be/HfT0uXBpBg4
+Here is the link to my youtube vedio:https://youtu.be/ehFNNfSSY1c
 
 Description:
 Case 1: 
