@@ -155,6 +155,9 @@ public class Congressional extends AppCompatActivity {
             zipCode = intent.getStringExtra(MainActivity.ZipCode);
             prefix = zipCode + "&fields=cd&api_key=" + geocodiaApiKey;
             url = "https://api.geocod.io/v1.3/geocode?q=" + prefix;
+
+        } else {
+            Log.e("Error", "something went wrong");
         }
 
 
@@ -167,11 +170,12 @@ public class Congressional extends AppCompatActivity {
                     JSONObject object = resultArr.getJSONObject(0);
                     JSONObject field = object.getJSONObject("fields");
                     JSONArray congrArr = field.getJSONArray("congressional_districts");
-                    JSONObject info = congrArr.getJSONObject(0);
-                    JSONArray cur_leg =  info.getJSONArray("current_legislators");
-                    //set the data and ready to pass to next activity
-                    setStaff(cur_leg);
-
+                    for (int i = 0; i < congrArr.length(); i++) {
+                        JSONObject info = congrArr.getJSONObject(i);
+                        JSONArray cur_leg0 =  info.getJSONArray("current_legislators");
+                        //set the data and ready to pass to next activity
+                        setStaff(cur_leg0, i);
+                    }
                     //set the message on the top of the list view
                     TextView message = findViewById(R.id.message);
                     message.setText("Here is the result for Zip Code: " + zipCode + "!");
@@ -210,10 +214,16 @@ public class Congressional extends AppCompatActivity {
         queue.add(jor);
     }
 
-    public void setStaff(JSONArray cur_leg) {
+    public void setStaff(JSONArray cur_leg, int num) {
         /** find all information i need inset in to my data structure */
         try {
-            for (int i = 0; i < cur_leg.length(); i++) {
+            int end;
+            if(num == 0) {
+                end = cur_leg.length();
+            } else {
+                end = 1;
+            }
+            for (int i = 0; i < end; i++) {
                 JSONObject cur = cur_leg.getJSONObject(i);
                 JSONObject bio = cur.getJSONObject("bio");
                 JSONObject contact = cur.getJSONObject("contact");
@@ -228,12 +238,9 @@ public class Congressional extends AppCompatActivity {
                 String memId = ref.getString("bioguide_id");
                 CongressStaff cur_staff = new CongressStaff(type, first, last, party, phone, web,
                         contact_form, memId);
-                if (congress_staff.size() > i) {
-                    congress_staff.set(i, cur_staff);
-                } else {
-                    congress_staff.add(cur_staff);
-                }
+                congress_staff.add(cur_staff);
                 Log.e("size of the array", "" + congress_staff.size());
+                Log.e("size of the jsonarray", "" + cur_leg.length());
             }
             Log.e("size after loop", "" + congress_staff.size());
         }catch (JSONException e) {
