@@ -3,8 +3,14 @@ prog02b-fa18-zzyyzzzzy created by GitHub Classroom
 
 Name: Zuojun Zheng
 
-Note: Hi, this is Zuojun, My apk file is under this path "NewRepresnet/app/build/outputs/apk/debug/"
+Submission Time on bCourse: Oct 6 at 3:06am
+
+Note:
+1, I would like to use one of my slip days to get the extra 5 bonuses point for the project.
+2, My apk file is under this path "NewRepresnet/app/build/outputs/apk/debug/"
 Thank you very much!!!
+
+
 
 Here is the link to my youtube vedio:https://youtu.be/ehFNNfSSY1c
 
